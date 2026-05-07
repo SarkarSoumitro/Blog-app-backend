@@ -1,6 +1,7 @@
 package com.example.The.blog.app.services;
 
 import com.example.The.blog.app.domain.CreatePostRequest;
+import com.example.The.blog.app.domain.UpdatePostRequest;
 import com.example.The.blog.app.domain.entities.Post;
 import com.example.The.blog.app.domain.entities.User;
 
@@ -11,4 +12,7 @@ public interface PostService {
     List<Post> getAllPosts(UUID categoryId, UUID tagId);
     List<Post> getDraftPosts(User user);
     Post createPost(User user, CreatePostRequest createPostRequest);
+    Post updatePost (UUID id , UpdatePostRequest updatePostRequest);
+    Post getPostById(UUID id);
+    void deletePost(UUID id);
 }

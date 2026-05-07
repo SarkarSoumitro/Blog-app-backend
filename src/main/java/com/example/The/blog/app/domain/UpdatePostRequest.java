@@ -1,9 +1,14 @@
 package com.example.The.blog.app.domain;
 
+import com.example.The.blog.app.domain.entities.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +17,16 @@ import lombok.NoArgsConstructor;
 public class UpdatePostRequest {
 
 
-    private
+    private UUID id;
+    private  String title;
+    private  String content;
+    private  UUID categoryId;
+
+    @Builder.Default
+    private Set<UUID> tagids = new HashSet<>();
+
+    private  PostStatus status;
+
+
+
 }

@@ -2,6 +2,7 @@ package com.example.The.blog.app.controller;
 
 import com.example.The.blog.app.domain.CreatePostRequest;
 import com.example.The.blog.app.domain.PostStatus;
+import com.example.The.blog.app.domain.UpdatePostRequest;
 import com.example.The.blog.app.domain.dtos.CreatePostDtos;
 import com.example.The.blog.app.domain.dtos.PostDto;
 import com.example.The.blog.app.domain.dtos.UpdatePostRequestDto;
@@ -60,5 +61,23 @@ public class PostController {
             @PathVariable UUID id,
            @Valid@RequestBody UpdatePostRequestDto updatePostRequestDto
             ){
+        UpdatePostRequest updatePostRequest = postMapper.toUpdatePostRequest(updatePostRequestDto);
+        Post upadatedPost = postService.updatePost(id, updatePostRequest);
+        PostDto updatedDto = postMapper.toDto(upadatedPost);
+        return ResponseEntity.ok(updatedDto);
     }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PostDto> getPost(@PathVariable UUID id){
+
+        Post post = postService.getPostById(id);
+        PostDto postDto = postMapper.toDto(post);
+        return ResponseEntity.ok(postDto);
+    }
+
+    public ResponseEntity<Void> deletePost(@PathVariable UUID id){
+         postService.deletePost(id);
+         return ResponseEntity.noContent().build();
+    }
+
 }
